@@ -1,3 +1,5 @@
+import java.util.Arrays;
+
 // 2021-04-29-Thu
 /*
 * Calculate each car's time needed to arrive the target

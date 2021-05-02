@@ -1,3 +1,7 @@
+import java.util.Arrays;
+import java.util.LinkedList;
+import java.util.Queue;
+
 // 2021-05-01 Sat
 public class Leet449 {
     class TreeNode {
@@ -20,7 +24,7 @@ public class Leet449 {
         return sb.toString();
     }
 
-    public void serialize(TreeNode root, StringBuilder sb) {
+    private void serialize(TreeNode root, StringBuilder sb) {
         if (root == null) return;
         sb.append(root.val).append(",");
         serialize(root.left, sb);
@@ -35,7 +39,7 @@ public class Leet449 {
         return deserialize(queue, Integer.MIN_VALUE, Integer.MAX_VALUE);
     }
 
-    public TreeNode deserialize(Queue<String> queue, int lower, int upper) {
+    private TreeNode deserialize(Queue<String> queue, int lower, int upper) {
         // Empty check
         if (queue.isEmpty()) return null;
         String cur = queue.peek();

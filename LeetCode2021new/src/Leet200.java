@@ -69,7 +69,7 @@ public class Leet200 {
     }
     private int find2( int i, int[] parent){
         if(parent[i] != i) {
-            parent[i] = find(parent[i], parent);
+            parent[i] = find2(parent[i], parent);
         }
         return parent[i];
     }
@@ -120,10 +120,20 @@ public class Leet200 {
 
         return res;
     }
-    public int find3( int i, int[] parent){
+    private int find3(int i, int[] parent){
         if(parent[i] != i) {
-            parent[i] = find(parent[i], parent);
+            parent[i] = find3(parent[i], parent);
         }
         return parent[i];
     }
+}
+
+class Leet200Test {
+    public static void main(String[] args) {
+        Leet200 leet200 = new Leet200();
+        char[][] grid = {{'1','1','0'}, {'0','0','1'},{'1','0','1'}};
+        int res = leet200.numIslands(grid);
+        System.out.println("result" + res );
+    }
+
 }
