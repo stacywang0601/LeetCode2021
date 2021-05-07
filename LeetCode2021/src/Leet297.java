@@ -19,17 +19,19 @@ public class Leet297 {
 
     // Encodes a tree to a single string.
     public String serialize(TreeNode root) {
-        return serialize(root, new StringBuilder()).toString();
+        StringBuilder sb = new StringBuilder();
+        serialize(root, sb);
+        return sb.toString();
     }
 
-    private StringBuilder serialize(TreeNode node, StringBuilder sb) {
-        if(node == null) {
-            return sb.append("#,");
+    private void serialize(TreeNode node, StringBuilder sb) {
+        if (node == null) {
+            sb.append("#,");
+            return;
         }
         sb.append(node.val).append(",");
         serialize(node.left, sb);
         serialize(node.right, sb);
-        return sb;
     }
 
     // Decodes your encoded data to tree.
@@ -39,7 +41,7 @@ public class Leet297 {
 
     private TreeNode deserialize(Queue<String> queue) {
         String cur = queue.remove();
-        if(cur.equals("#")) {
+        if (cur.equals("#")) {
             return null;
         }
         TreeNode node = new TreeNode(Integer.valueOf(cur));
