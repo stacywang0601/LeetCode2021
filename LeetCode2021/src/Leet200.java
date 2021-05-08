@@ -1,3 +1,6 @@
+import java.util.LinkedList;
+import java.util.Queue;
+
 // 2021-05-01 Sat
 // 2021-05-04 Tue
 public class Leet200 {
@@ -52,7 +55,6 @@ public class Leet200 {
         for (int i = 0; i < m; i++) {
             for (int j = 0; j < n; j++) {
                 if (grid[i][j] == '1') {
-                    grid[i][j] = '#';
                     for (int k = 0; k < 4; k++) {
                         int x = i + dir[k], y = j + dir[k + 1];
                         if (x < 0 || x >= m || y < 0 || y >= n || grid[x][y] != '1') continue;
@@ -99,7 +101,6 @@ public class Leet200 {
         for (int i = 0; i < m; i++) {
             for (int j = 0; j < n; j++) {
                 if (grid[i][j] == '1') {
-                    grid[i][j] = '#';
                     for (int k = 0; k < 4; k++) {
                         int x = i + dir[k], y = j + dir[k + 1];
                         if (x < 0 || x >= m || y < 0 || y >= n || grid[x][y] != '1') continue;
@@ -130,13 +131,17 @@ public class Leet200 {
         return parent[i];
     }
 
-    // Approach 4: DFS with dir[] and boundary check before going to next round
+    /***********************************************************************************/
+
+    // Approach 4: DFS with dir[], mark as visited and boundaryt check before dfs
     int[] dir = {1, 0, -1, 0, 1};
     public int numIslands4(char[][] grid) {
         int res = 0;
         for (int i = 0; i < grid.length; i++) {
             for (int j = 0; j < grid[0].length; j++) {
                 if (grid[i][j] == '1') {
+                    // Mark as visited before dfs
+                    grid[i][j] = '#';
                     dfs2(grid, i, j);
                     res++;
                 }
@@ -146,12 +151,44 @@ public class Leet200 {
     }
 
     private void dfs2(char[][] grid, int i, int j) {
-        grid[i][j] = '#';
         for (int k = 0; k < 4; k++) {
-            int x = i + dir[k];
-            int y = j + dir[k + 1];
+            int x = i + dir[k], y = j + dir[k + 1];
+            // Boundary check and mark as visited before dfs
             if (x < 0 || x >= grid.length || y < 0 || y >= grid[0].length || grid[x][y] != '1') continue;
+            grid[x][y] = '#';
             dfs2(grid, x, y);
         }
+    }
+
+    /***********************************************************************************/
+
+    // Approach 5: BFS with dir[], mark as visited and boundaryt check before adding to queue
+    public int numIslands5(char[][] grid) {
+        int m = grid.length, n = grid[0].length;
+        int res = 0;
+        int[] dir = {0, 1, 0, -1, 0};
+        Queue<int[]> queue = new LinkedList<>();
+        for (int i = 0; i < m; i++) {
+            for (int j = 0; j < n; j++) {
+                if (grid[i][j] == '1') {
+                    // Mark as visited before adding to the queue
+                    grid[i][j] = '#';
+                    queue.add(new int[]{i, j});
+                    while (!queue.isEmpty()) {
+                        int[] cur = queue.remove();
+                        for (int k = 0; k < 4; k++) {
+                            int x = cur[0] + dir[k];
+                            int y = cur[1] + dir[k + 1];
+                            // Boundary check && mark as visited before adding to the queue
+                            if (x < 0 || x >= m || y < 0 || y >= n || grid[x][y] != '1') continue;
+                            grid[x][y] = '#';
+                            queue.add(new int[]{x, y});
+                        }
+                    }
+                    res++;
+                }
+            }
+        }
+        return res;
     }
 }
