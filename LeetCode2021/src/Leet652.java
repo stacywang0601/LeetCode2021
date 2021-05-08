@@ -3,6 +3,8 @@ import java.util.*;
 /*
  * 2021-05-03 Mon
  * Postorder traversal + serialization
+ * Have to use bottom-to-up postorder approach, pre-order doesn't work here
+ * Hence, local sb with String return type
  */
 public class Leet652 {
     class TreeNode {
