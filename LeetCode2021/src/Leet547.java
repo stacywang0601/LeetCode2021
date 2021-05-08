@@ -13,6 +13,8 @@ public class Leet547 {
         int res = 0;
         for (int i = 0; i < isConnected.length; i++) {
             if (visited[i] == 0) {
+                // Mark as visited before dfs
+                visited[i] = 1;
                 dfs(isConnected, visited, i);
                 res++;
             }
@@ -23,6 +25,7 @@ public class Leet547 {
     private void dfs(int[][] isConnected, int[] visited, int i) {
         for (int j = 0; j < isConnected.length; j++) {
             if (isConnected[i][j] == 1 && visited[j] == 0) {
+                // Mark as visited before dfs
                 visited[j] = 1;
                 dfs(isConnected, visited, j);
             }
@@ -39,12 +42,15 @@ public class Leet547 {
         Queue<Integer> queue = new LinkedList<>();
         for (int i = 0; i < len; i++) {
             if (visited[i] == 0) {
+                // Mark as visited before adding to the queue
+                visited[i] = 1;
                 queue.add(i);
                 while (!queue.isEmpty()) {
                     int cur = queue.remove();
-                    visited[cur] = 1;
                     for (int j = 0; j < len; j++) {
                         if (isConnected[cur][j] == 1 && visited[j] == 0) {
+                            // Mark as visited before adding to the queue
+                            visited[j] = 1;
                             queue.add(j);
                         }
                     }
