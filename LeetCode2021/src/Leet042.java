@@ -27,20 +27,17 @@ public class Leet042 {
 
     public int trap2(int[] height) {
         int len = height.length;
-        if(len == 0) return 0;
-
-        int l = 0, r = len-1, sum = 0;
-        int maxLeft = height[0], maxRight = height[len-1];
-
+        int l = 0, r = len - 1;
+        int maxLeft = 0, maxRight = 0, sum = 0;
         while(l < r) {
-            if (maxLeft < maxRight) {
+            if(height[l] < height[r]) {
+                maxLeft = Math.max(maxLeft, height[l]);
                 sum += maxLeft - height[l];
                 l++;
-                maxLeft = Math.max(maxLeft, height[l]);
             }else {
+                maxRight = Math.max(maxRight, height[r]);
                 sum += maxRight - height[r];
                 r--;
-                maxRight = Math.max(maxRight, height[r]);
             }
         }
         return sum;
