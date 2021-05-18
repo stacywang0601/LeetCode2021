@@ -28,6 +28,7 @@ public class Leet098 {
     // Recursive inorder with prev
     class Solution2 {
         // We use Integer instead of int as it supports a null value.
+        // Have to use a global variable instead of passing it along with recursion 
         private Integer prev;
 
         public boolean isValidBST(TreeNode root) {
