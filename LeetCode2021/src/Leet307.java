@@ -3,21 +3,21 @@
  * Fenwick Tree (Binary Index Tree)
  * */
 public class Leet307 {
-    public class NumArray {
-        int[] nums;
+    class NumArray {
         int[] BIT;
+        int[] nums;
         int n;
 
         public NumArray(int[] nums) {
             this.nums = nums;
-
             n = nums.length;
             BIT = new int[n + 1];
-            for (int i = 0; i < n; i++)
+            for (int i = 0; i < n; i++) {
                 init(i, nums[i]);
+            }
         }
 
-        public void init(int i, int val) {
+        private void init(int i, int val) {
             i++;
             while (i <= n) {
                 BIT[i] += val;
@@ -25,15 +25,15 @@ public class Leet307 {
             }
         }
 
-        void update(int i, int val) {
-            int diff = val - nums[i];
-            nums[i] = val;
-            init(i, diff);
+        public void update(int index, int val) {
+            int diff = val - nums[index];
+            nums[index] = val;
+            init(index, diff);
         }
 
-        public int getSum(int i) {
-            int sum = 0;
+        private int getSum(int i) {
             i++;
+            int sum = 0;
             while (i > 0) {
                 sum += BIT[i];
                 i -= (i & -i);
@@ -41,10 +41,11 @@ public class Leet307 {
             return sum;
         }
 
-        public int sumRange(int i, int j) {
-            return getSum(j) - getSum(i - 1);
+        public int sumRange(int left, int right) {
+            return getSum(right) - getSum(left - 1);
         }
     }
+
 /**
  * Your NumArray object will be instantiated and called as such:
  * NumArray obj = new NumArray(nums);
