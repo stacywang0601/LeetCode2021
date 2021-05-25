@@ -29,7 +29,7 @@ public class Leet098 {
     class Solution2 {
         // Have to use a global variable instead of passing it along with recursion
         // As after the left subtree traverse, the pre should change
-        private TreeNode pre;
+        private TreeNode prev;
 
         public boolean isValidBST(TreeNode root) {
             prev = null;
