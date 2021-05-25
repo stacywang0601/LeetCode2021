@@ -27,9 +27,9 @@ public class Leet098 {
 
     // Recursive inorder with prev
     class Solution2 {
-        // We use Integer instead of int as it supports a null value.
-        // Have to use a global variable instead of passing it along with recursion 
-        private Integer prev;
+        // Have to use a global variable instead of passing it along with recursion
+        // As after the left subtree traverse, the pre should change
+        private TreeNode pre;
 
         public boolean isValidBST(TreeNode root) {
             prev = null;
@@ -43,10 +43,10 @@ public class Leet098 {
             if (!inorder(root.left)) {
                 return false;
             }
-            if (prev != null && root.val <= prev) {
+            if (prev != null && root.val <= prev.val) {
                 return false;
             }
-            prev = root.val;
+            prev = root;
             return inorder(root.right);
         }
     }
