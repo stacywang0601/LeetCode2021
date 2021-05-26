@@ -35,10 +35,11 @@ public class Leet301 {
                 for (int j = lastJ; j <= i; j++) {
                     // s.charAt(j) == close && s.charAt(j - 1) != close make sure we only remove the fist close
                     // But when j = lastJ = 0, i-1 is -1, so need boundary check
-                    if (s.charAt(j) == close && (j == lastJ || s.charAt(j - 1) != close)) {
+                    if (s.charAt(j) == close && (j == 0 || s.charAt(j - 1) != close)) {
                         helper(s.substring(0, j) + s.substring(j + 1), res, i, j, open, close);
                     }
                 }
+                // return after removing this first open. leave later to the recursive calls
                 return;
             }
         }
