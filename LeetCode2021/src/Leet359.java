@@ -1,5 +1,5 @@
-import java.util.Iterator;
 import java.util.LinkedList;
+import java.util.Queue;
 
 public class Leet359 {
     class Logger {
@@ -31,9 +31,7 @@ public class Leet359 {
             while (!queue.isEmpty() && (queue.peek().timestamp + 10) <= timestamp) {
                 queue.remove();
             }
-            Iterator<Log> ite = queue.iterator();
-            while (ite.hasNext()) {
-                Log cur = ite.next();
+            for (Log cur : queue) {
                 if (cur.message.equals(message)) {
                     return false;
                 }
