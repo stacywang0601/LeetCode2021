@@ -43,22 +43,20 @@ public class Leet1854 {
 
     // Approach 2: accumulate sum
     public int maximumPopulation2(int[][] logs) {
-        // population from 1950 - 2050
-        int[] count = new int[2050-1950+1];
+        int[] count = new int[2050 - 1950 + 1];
 
-        for(int[] log : logs){
-            count[log[0] - 1950] += 1;
-            count[log[1] - 1950] -= 1;
+        for (int[] log : logs) {
+            count[log[0] - 1950]++;
+            count[log[1] - 1950]--;
         }
 
-        int max = count[0], earliest = 1950;
+        int pop = count[0], max = count[0], earliest = 1950;
 
-        for(int i = 1; i < count.length; i++){
-            // Accumulate sum
-            count[i] += count[i - 1];
+        for (int i = 1; i < count.length; i++) {
+            pop += count[i];
 
-            if(count[i] > max){
-                max = count[i];
+            if (pop > max) {
+                max = pop;
                 earliest = i + 1950;
             }
         }
