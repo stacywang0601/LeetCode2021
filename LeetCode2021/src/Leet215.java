@@ -36,11 +36,11 @@ public class Leet215 {
 
             if (pivot == K) {
                 return nums[K];
-            } else if (pivot < K) {
-                return quicksort(pivot + 1, h);
-            } else {
-                return quicksort(l, pivot - 1);
             }
+            if (pivot < K) {
+                return quicksort(pivot + 1, h);
+            }
+            return quicksort(l, pivot - 1);
         }
 
         private int partition(int l, int h, int pivot) {
