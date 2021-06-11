@@ -3,24 +3,19 @@ import java.util.Arrays;
 public class Leet105 {
     class Solution {
         public TreeNode buildTree(int[] preorder, int[] inorder) {
-            if (preorder == null || inorder == null) return null;
-
-            int preLen = preorder.length, inLen = inorder.length;
-            if (preLen == 0 && inLen == 0) return null;
-            if (preLen == 1 && inLen == 1) return new TreeNode(preorder[0]);
-
+            int len = preorder.length;
+            if (len == 0) return null;
             int index = 0;
-            for (int i = 0; i < inLen; i++) {
+            for (int i = 0; i < len; i++) {
                 if (inorder[i] == preorder[0]) {
                     index = i;
                     break;
                 }
             }
-            TreeNode node = new TreeNode(inorder[index]);
 
+            TreeNode node = new TreeNode(preorder[0]);
             node.left = buildTree(Arrays.copyOfRange(preorder, 1, index + 1), Arrays.copyOfRange(inorder, 0, index));
-            node.right = buildTree(Arrays.copyOfRange(preorder, index + 1, preLen), Arrays.copyOfRange(inorder, index + 1, inLen));
-
+            node.right = buildTree(Arrays.copyOfRange(preorder, index + 1, len), Arrays.copyOfRange(inorder, index + 1, len));
             return node;
         }
     }
