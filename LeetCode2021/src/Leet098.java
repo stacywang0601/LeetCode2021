@@ -27,27 +27,18 @@ public class Leet098 {
 
     // Recursive inorder with prev
     class Solution2 {
-        // Have to use a global variable instead of passing it along with recursion
-        // As after the left subtree traverse, the pre should change
-        private TreeNode prev;
+        TreeNode pre;
 
         public boolean isValidBST(TreeNode root) {
-            prev = null;
             return inorder(root);
         }
 
-        private boolean inorder(TreeNode root) {
-            if (root == null) {
-                return true;
-            }
-            if (!inorder(root.left)) {
-                return false;
-            }
-            if (prev != null && root.val <= prev.val) {
-                return false;
-            }
-            prev = root;
-            return inorder(root.right);
+        private boolean inorder(TreeNode node) {
+            if (node == null) return true;
+            if (!inorder(node.left)) return false;
+            if (pre != null && pre.val >= node.val) return false;
+            pre = node;
+            return inorder(node.right);
         }
     }
 
