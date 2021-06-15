@@ -42,24 +42,24 @@ public class Leet1854 {
     }
 
     // Approach 2: accumulate sum
-    public int maximumPopulation2(int[][] logs) {
-        int[] count = new int[2050 - 1950 + 1];
-
-        for (int[] log : logs) {
-            count[log[0] - 1950]++;
-            count[log[1] - 1950]--;
-        }
-
-        int pop = count[0], max = count[0], earliest = 1950;
-
-        for (int i = 1; i < count.length; i++) {
-            pop += count[i];
-
-            if (pop > max) {
-                max = pop;
-                earliest = i + 1950;
+    class Solution2 {
+        public int maximumPopulation(int[][] logs) {
+            int[] count = new int[2050-1950+1];
+            for(int[] log: logs) {
+                count[log[0]-1950]++;
+                count[log[1]-1950]--;
             }
+
+            int earliest = 1950, max = count[0];
+
+            for(int i = 1; i < 101; i++) {
+                count[i] += count[i-1];
+                if(count[i] > max) {
+                    max = count[i];
+                    earliest = i + 1950;
+                }
+            }
+            return earliest;
         }
-        return earliest;
     }
 }
