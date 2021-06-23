@@ -10,11 +10,11 @@ public class Leet113 {
         }
 
         private void dfs(TreeNode node, int sum, List<List<Integer>> res, List<Integer> cur) {
-            if(node == null) return;
+            if (node == null) return;
             cur.add(node.val);
-            if(node.left == null && node.right == null && node.val == sum){
+            if (node.left == null && node.right == null && node.val == sum) {
                 res.add(new ArrayList<>(cur));
-            }else {
+            } else {
                 dfs(node.left, sum - node.val, res, cur);
                 dfs(node.right, sum - node.val, res, cur);
             }
