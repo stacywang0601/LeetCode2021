@@ -40,7 +40,7 @@ public class Leet107 {
         private void dfs(TreeNode node, List<List<Integer>> res, int level) {
             if (node == null) return;
 
-            if (res.size() < level + 1) {
+            if (res.size() == level) {
                 res.add(new ArrayList<Integer>());
             }
             res.get(level).add(node.val);
