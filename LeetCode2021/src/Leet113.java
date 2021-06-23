@@ -3,22 +3,21 @@ import java.util.List;
 
 public class Leet113 {
     class Solution {
-        public List<List<Integer>> pathSum(TreeNode root, int sum) {
+        public List<List<Integer>> pathSum(TreeNode root, int targetSum) {
             List<List<Integer>> res = new ArrayList<>();
-            getPath(root, sum, res, new ArrayList<>());
+            dfs(root, targetSum, res, new ArrayList<>());
             return res;
         }
 
-        public void getPath(TreeNode root, int sum, List<List<Integer>> res, List<Integer> cur) {
-            if (root == null) {
-                return;
-            }
-            cur.add(root.val);
-            if (root.left == null && root.right == null && root.val == sum) {
+        private void dfs(TreeNode node, int sum, List<List<Integer>> res, List<Integer> cur) {
+            if(node == null) return;
+            cur.add(node.val);
+            if(node.left == null && node.right == null && node.val == sum){
                 res.add(new ArrayList<>(cur));
+            }else {
+                dfs(node.left, sum - node.val, res, cur);
+                dfs(node.right, sum - node.val, res, cur);
             }
-            getPath(root.left, sum - root.val, res, cur);
-            getPath(root.right, sum - root.val, res, cur);
             cur.remove(cur.size() - 1);
         }
     }
