@@ -21,7 +21,7 @@ public class Leet047 {
         }
         for (int i = 0; i < nums.length; i++) {
             if (visited[i]) continue;
-            if (i > 0 && nums[i] == nums[i - 1] && visited[i - 1]) continue;
+            if (i > 0 && nums[i] == nums[i - 1] && !visited[i - 1]) continue;
             visited[i] = true;
             cur.add(nums[i]);
             helper(nums, res, cur, visited);
