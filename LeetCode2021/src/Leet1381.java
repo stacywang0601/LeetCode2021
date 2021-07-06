@@ -10,41 +10,42 @@ import java.util.Stack;
  * so that we can accumulate the increment inc[i]
  * for the bottom elements and the following pops.
  */
-class CustomStack {
-    int n;
-    int[] inc;
-    Stack<Integer> stack;
+class Leet1381 {
+    class CustomStack {
+        int n;
+        int[] inc;
+        Stack<Integer> stack;
 
-    public CustomStack(int maxSize) {
-        this.n = maxSize;
-        stack = new Stack<>();
-        inc = new int[n + 1];
-    }
-
-    public void push(int x) {
-        if (stack.size() < n) {
-            stack.push(x);
-        }
-    }
-
-    public int pop() {
-        int i = stack.size();
-        if (i <= 0) {
-            return -1;
+        public CustomStack(int maxSize) {
+            this.n = maxSize;
+            stack = new Stack<>();
+            inc = new int[n + 1];
         }
 
-        inc[i - 1] += inc[i];
-        int res = stack.pop() + inc[i];
-        inc[i] = 0;
-        return res;
-    }
+        public void push(int x) {
+            if (stack.size() < n) {
+                stack.push(x);
+            }
+        }
 
-    public void increment(int k, int val) {
-        int i = Math.min(k, stack.size());
-        inc[i] += val;
+        public int pop() {
+            int i = stack.size();
+            if (i <= 0) {
+                return -1;
+            }
+
+            inc[i - 1] += inc[i];
+            int res = stack.pop() + inc[i];
+            inc[i] = 0;
+            return res;
+        }
+
+        public void increment(int k, int val) {
+            int i = Math.min(k, stack.size());
+            inc[i] += val;
+        }
     }
 }
-
 /**
  * Your CustomStack object will be instantiated and called as such:
  * CustomStack obj = new CustomStack(maxSize);
@@ -52,4 +53,3 @@ class CustomStack {
  * int param_2 = obj.pop();
  * obj.increment(k,val);
  */
-}
