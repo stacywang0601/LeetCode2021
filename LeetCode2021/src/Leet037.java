@@ -29,13 +29,12 @@ public class Leet037 {
             int k = i / 3 * 3 + j / 3;
 
             for (int num = 1; num <= 9; num++) {
-                if (!rows[i][num] && !cols[j][num] && !boxes[k][num]) {
-                    board[i][j] = (char) (num + '0');
-                    rows[i][num] = cols[j][num] = boxes[k][num] = true;
-                    if (dfs(board, j == 8 ? i + 1 : i, j == 8 ? 0 : j + 1)) return true;
-                    rows[i][num] = cols[j][num] = boxes[k][num] = false;
-                    board[i][j] = '.';
-                }
+                if (rows[i][num] || cols[j][num] || boxes[k][num]) continue;
+                rows[i][num] = cols[j][num] = boxes[k][num] = true;
+                board[i][j] = (char) (num + '0');
+                if (dfs(board, j == 8 ? i + 1 : i, j == 8 ? 0 : j + 1)) return true;
+                rows[i][num] = cols[j][num] = boxes[k][num] = false;
+                board[i][j] = '.';
             }
             return false;
         }
